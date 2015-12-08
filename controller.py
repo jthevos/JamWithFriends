@@ -1,5 +1,5 @@
 ﻿import view, model
-from timer
+from timer import *
 
 def importSong():
    model.readNewMIDISong()
@@ -8,10 +8,11 @@ def getCurrentScore():
    return model.score
 
 def viewInstrumentParts(): # used to view all parts currently in the score
-   model.viewParts()
+   return model.viewParts()
 
-# unsure as to whether or not the display needs to be passed
-# has been included for now
+def viewPhrasesWithinPart(part):
+   return model.viewPhrases(part)
+
 def createJamspace(display):
    print "jamspace created"
 
@@ -38,16 +39,10 @@ def deleteSubPart(score,part):
    print part.getTitle() + "has been deleted."
    return score
 
-# to be called for the loop button   
-
-
-def copyPhrase(phr):
-   Mod.repeat(phr,1)
-   return phr
 
 #Plays full score from the beginning
-def restartTrack(score):
-   Play.midi(score)
+def restartTrack():
+   Play.midi(model.score)
    startPlayLine()
 
 def startPlayLine():
@@ -71,11 +66,8 @@ def changeVolume(new_value):
    slider1.setValue(new_value)
 
 
-
-
 # possibly link this to a slider that goes from -7 to 7 which will
 # correspond to flats and sharps with 0 being C in major and A in minor
 # assumes major for now.
 def changeKeySignature(signature):
-   score.setKeySignature(signature)
-   return score
+   model.score.setKeySignature(signature)

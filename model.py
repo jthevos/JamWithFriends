@@ -27,21 +27,23 @@ def addPart(argument):
 
    return part
 
+# used to view component parts of the working score
 def viewParts():
    return score.getPartList()
 
-def viewPhrases():
-   part.getPhraseList()
+# used to view component phrases within a specified part
+def viewPhrases(part):
+   return part.getPhraseList()
 
-def copyPart(part):
-   Mod.repeat(part,1)
+# used to loop a particular phrase
+def loopPhrase(part,phr,timesToLoop):
+   for i in range(timesToLoop)
+   part.addPhrase(phr)
    return part
 
-# flips between major and minor 
+# flips the entire score between major and minor - other musical modes can be added at later stages of development 
 def changeQuality(quality):
    if score.getKeyQuality() == 0:
       score.setKeyQualty(1)
    elif score.getKeyQuality() == 1:
       score.setKeyQuality(0)
-      
-   return score
