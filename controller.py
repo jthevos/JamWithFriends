@@ -1,6 +1,4 @@
-﻿from MVC_jamWithFriends import *
-from music import *
-from gui import *
+﻿import view, model
 
 # Basic addition of parts based on instrument. 
 # Only 5 are included as of to serve as the MVP
@@ -33,25 +31,40 @@ def connectToOSC(ipAddrComp,ipAddrPhone):
 
 def browseJams():
    print "Coming soon!"
+   
+def createPart():
+   part = Part()
+   return part
 
 # delete functions for different levels of granularity 
-def deleteSubPhrase(phr):
-   print phr.getTitle() + " has been deleted."    
+def deleteSubPhrase(part, phr):
+   phr.empty()
+   return part    
      
-def deleteSubPart(part):
-   print part.getTitle() + "has been deleted."
+def deleteSubPart(score,part):
    part.empty()
+   print part.getTitle() + "has been deleted."
+   return score
 
 # to be called for the loop button   
-def copyPart(part, startTime):
-   clonedPart = part.copy()
-   clonedPart.setStartTime(startTime)
+def copyPart(part):
+   Mod.repeat(part,1)
+   return part
 
+def copyPhrase(phr):
+   Mod.repeat(phr,1)
+   return phr
+
+#Plays full score from the beginning
+def restartTrack(score):
+   Play.midi(score)
+   startPlayLine()
+
+def startPlayLine():
+   playLine = Line(10,10,10,720, Color.RED,3)
+   view.d.add(playLine)
 # Should the composer decide to change the instrument of an existing part, 
 # they can do so with this.   
-
-def restartTrack():
-   
 def changeInstrument(part,new_instrument):
    part.setInstrument(new_instrument)
 
